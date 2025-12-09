@@ -1,0 +1,28 @@
+services:
+    sio_test:
+        user: app
+        build:
+            context: .
+            args:
+                USER_ID: ${USER_ID:-1000}
+        ports:
+            - "8337:8337"
+        volumes:
+            - .:/app:rw
+        environment:
+            - APP_ENV=dev
+    db:
+        image: postgres:15
+        container_name: systeme_test_db
+        restart: unless-stopped
+        environment:
+            POSTGRES_USER: admin
+            POSTGRES_PASSWORD: 123456
+            POSTGRES_DB: systemeio
+        ports:
+            - "5432:5432"
+        volumes:
+            - db_data:/var/lib/postgresql/data
+
+volumes:
+    db_data:
