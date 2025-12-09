@@ -28,3 +28,15 @@ services:
 
     App\ArgumentResolver\DtoValueResolver:
         tags: [ 'controller.argument_value_resolver' ]
+
+    App\Payment\Processor\PaypalAdapter:
+        tags:
+            - { name: 'app.payment_processor', key: 'paypal' }
+
+    App\Payment\Processor\StripeAdapter:
+        tags:
+            - { name: 'app.payment_processor', key: 'stripe' }
+
+    App\Payment\PaymentProcessorFactory:
+        arguments:
+            - !tagged_locator 'app.payment_processor'

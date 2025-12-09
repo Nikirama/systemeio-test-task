@@ -6,7 +6,7 @@ use App\Enum\TaxRate;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class TaxNumberConstraintValidator extends ConstraintValidator
+class TaxNumberValidator extends ConstraintValidator
 {
     public function validate($value, Constraint $constraint): void
     {

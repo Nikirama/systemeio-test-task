@@ -31,11 +31,53 @@ class Purchase
     #[ORM\Column(length: 50)]
     private string $paymentProcessor;
 
-    #[ORM\Column(type: 'datetime')]
-    private DateTimeInterface $createdAt;
-
-    public function __construct()
+    public function getProduct(): Product
     {
-        $this->createdAt = new DateTimeImmutable();
+        return $this->product;
+    }
+
+    public function setProduct(Product $product): void
+    {
+        $this->product = $product;
+    }
+
+    public function getTaxNumber(): string
+    {
+        return $this->taxNumber;
+    }
+
+    public function setTaxNumber(string $taxNumber): void
+    {
+        $this->taxNumber = $taxNumber;
+    }
+
+    public function getCouponCode(): ?string
+    {
+        return $this->couponCode;
+    }
+
+    public function setCouponCode(?string $couponCode): void
+    {
+        $this->couponCode = $couponCode;
+    }
+
+    public function getFinalPrice(): string
+    {
+        return $this->finalPrice;
+    }
+
+    public function setFinalPrice(string $price): void
+    {
+        $this->finalPrice = $price;
+    }
+
+    public function getPaymentProcessor(): string
+    {
+        return $this->paymentProcessor;
+    }
+
+    public function setPaymentProcessor(string $paymentProcessor): void
+    {
+        $this->paymentProcessor = $paymentProcessor;
     }
 }
