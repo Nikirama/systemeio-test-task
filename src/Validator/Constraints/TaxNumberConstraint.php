@@ -10,8 +10,8 @@ class TaxNumberConstraint extends Constraint
 {
     public string $message = 'Invalid tax number format.';
 
-    public function getTargets(): string
+    public function validatedBy(): string
     {
-        return self::PROPERTY_CONSTRAINT;
+        return TaxNumberValidator::class;
     }
 }

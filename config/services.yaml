@@ -29,14 +29,19 @@ services:
     App\ArgumentResolver\DtoValueResolver:
         tags: [ 'controller.argument_value_resolver' ]
 
-    App\Payment\Processor\PaypalAdapter:
-        tags:
-            - { name: 'app.payment_processor', key: 'paypal' }
+    Systemeio\TestForCandidates\PaymentProcessor\PaypalPaymentProcessor: ~
+    Systemeio\TestForCandidates\PaymentProcessor\StripePaymentProcessor: ~
 
-    App\Payment\Processor\StripeAdapter:
+    App\Service\Payment\StripeAdapter:
         tags:
             - { name: 'app.payment_processor', key: 'stripe' }
 
-    App\Payment\PaymentProcessorFactory:
+    App\Service\Payment\PaypalAdapter:
+        tags:
+            - { name: 'app.payment_processor', key: 'paypal' }
+
+    App\Service\Payment\PaymentProcessorFactory:
         arguments:
-            - !tagged_locator 'app.payment_processor'
+            - !tagged_iterator
+                tag: 'app.payment_processor'
+                index_by: 'key'

@@ -4,9 +4,9 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "product": 1,
-  "taxNumber": "DE123456789",
-  "couponCode": "D15"
+  "productId": 1,
+  "taxNumber": "GR123456789",
+  "couponCode": "P10"
 }
 
 ### Execute Purchase
@@ -15,8 +15,8 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "product": 1,
+  "productId": 2,
   "taxNumber": "IT12345678900",
-  "couponCode": "D15",
+  "couponCode": "F15",
   "paymentProcessor": "paypal"
 }
