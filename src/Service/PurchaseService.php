@@ -23,7 +23,7 @@ class PurchaseService
         string $taxNumber,
         string $processor,
         ?string $couponCode
-    ): array {
+    ): int {
         $product = $this->productRepository->find($productId);
         if (!$product) {
             throw new RuntimeException('Product not found');
@@ -49,9 +49,6 @@ class PurchaseService
         $this->entityManager->persist($purchase);
         $this->entityManager->flush();
 
-        return [
-            'status' => 'ok',
-            'amount' => $price,
-        ];
+        return $purchase->getId();
     }
 }

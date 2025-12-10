@@ -32,7 +32,7 @@ class ProductController extends AbstractController
     {
         return $this->json([
             'status' => 'ok',
-            'result' => $this->purchaseService->purchase(
+            'purchaseId' => $this->purchaseService->purchase(
                 $request->productId,
                 $request->taxNumber,
                 $request->paymentProcessor,

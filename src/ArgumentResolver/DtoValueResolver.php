@@ -5,6 +5,7 @@ namespace App\ArgumentResolver;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -39,6 +40,21 @@ class DtoValueResolver implements ValueResolverInterface
                 'errors' => [
                     $path ?? 'field' => [$message]
                 ],
+            ]));
+        } catch (MissingConstructorArgumentsException $e) {
+            $errors = [];
+
+            if (preg_match_all('/"\$(\w+)"/', $e->getMessage(), $matches)) {
+                foreach ($matches[1] as $field) {
+                    $errors[$field][] = "Field \"$field\" is required.";
+                }
+            } else {
+                $errors['field'][] = "Missing required fields.";
+            }
+
+            throw new BadRequestHttpException(json_encode([
+                'status' => 'error',
+                'errors' => $errors,
             ]));
         }
 

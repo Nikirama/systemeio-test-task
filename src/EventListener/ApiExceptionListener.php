@@ -26,7 +26,7 @@ class ApiExceptionListener
         }
 
         $event->setResponse(new JsonResponse([
-            'error' => true,
+            'status' => 'error',
             'message' => $exception->getMessage(),
         ], $statusCode));
     }

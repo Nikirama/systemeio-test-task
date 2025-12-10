@@ -31,6 +31,11 @@ class Purchase
     #[ORM\Column(length: 50)]
     private string $paymentProcessor;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
     public function getProduct(): Product
     {
         return $this->product;
